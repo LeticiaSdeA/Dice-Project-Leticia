@@ -20,50 +20,50 @@ const diceImages       = ['img/dice-one.png',
                           'img/dice-four.png',
                           'img/dice-five.png',
                           'img/dice-six.png'
-                        ];
+                         ];
 
 let rollCount = 0;
 
 class Player {
-    constructor(name, diceIds, currentPointsId, totalScoreId) {
+    constructor(name, diceFaces, currentPointsId, totalScoreId) {
         this.name            = name;
-        this.diceIds         = diceIds;
+        this.diceFaces       = diceFaces;
         this.currentPointsId = currentPointsId;
         this.totalScoreId    = totalScoreId;
         this.currentPoints   = 0;
         this.totalScore      = 0;
     }
 
-    getCurrentPointsElement() {
+    getCurrentPoints() {
         return document.getElementById(this.currentPointsId);
     }
 
-    getTotalScoreElement() {
+    getTotalScore() {
         return document.getElementById(this.totalScoreId);
     }
 
     updatePoints(points) {
         this.currentPoints = points;
         this.totalScore   += points;
-        this.getCurrentPointsElement().innerHTML = this.currentPoints;
-        this.getTotalScoreElement().innerHTML    = this.totalScore;
+        this.getCurrentPoints().innerHTML = this.currentPoints;
+        this.getTotalScore().innerHTML    = this.totalScore;
     }
 
     reset() {
         this.currentPoints = 0;
         this.totalScore    = 0;
-        this.getCurrentPointsElement().innerHTML = this.currentPoints;
-        this.getTotalScoreElement().innerHTML    = this.totalScore;
+        this.getCurrentPoints().innerHTML = this.currentPoints;
+        this.getTotalScore().innerHTML    = this.totalScore;
 
-        this.diceIds.forEach(diceId => {
-            const dice         = document.getElementById(diceId);
+        this.diceFaces.forEach(diceFace => {
+            const dice         = document.getElementById(diceFace);
             dice.style.display = 'none';
         });
     }
 
     showDice() {
-        this.diceIds.forEach(diceId => {
-            const dice         = document.getElementById(diceId);
+        this.diceFaces.forEach(diceFace => {
+            const dice         = document.getElementById(diceFace);
             dice.style.display = 'inline-block';
         });
     }
@@ -72,42 +72,40 @@ class Player {
 const player1 = new Player('Player 1', ['player1-dice1', 'player1-dice2'], 'player1-current-points', 'player1-total-score');
 const player2 = new Player('Player 2', ['player2-dice1', 'player2-dice2'], 'player2-current-points', 'player2-total-score');
 
-document.addEventListener('DOMContentLoaded', () => {
-        startButton.addEventListener('click', () => {
-        startButton.style.display   = 'none';
-        rollButton.style.display    = 'inline-block';
-        restartButton.style.display = 'inline-block';
+startButton.addEventListener('click', () => {
+    startButton.style.display   = 'none';
+    rollButton.style.display    = 'inline-block';
+    restartButton.style.display = 'inline-block';
 
-        player1.showDice();
-        player2.showDice();
+    player1.showDice();
+    player2.showDice();
 
-        player1Dice1.src = defaultRollDice;
-        player1Dice2.src = defaultRollDice;
-        player2Dice1.src = defaultRollDice;
-        player2Dice2.src = defaultRollDice;
-    });
+    player1Dice1.src = defaultRollDice;
+    player1Dice2.src = defaultRollDice;
+    player2Dice1.src = defaultRollDice;
+    player2Dice2.src = defaultRollDice;
+});
 
-    rollButton.addEventListener('click', () => {
-        rollDice(player1, player2);
-    });
+rollButton.addEventListener('click', () => {
+    rollDice(player1, player2);
+});
 
-    restartButton.addEventListener('click', () => {
-        restartGame();
-    });
+restartButton.addEventListener('click', () => {
+    restartGame();
 });
 
 function rollDice(player1, player2) {
     rollCount++;
 
-    animateDiceRoll(player1.diceIds);
-    animateDiceRoll(player2.diceIds);
+    animateDiceRoll(player1.diceFaces);
+    animateDiceRoll(player2.diceFaces);
 
     setTimeout(() => {
         const dice1Values = [getRandomDiceNumber(), getRandomDiceNumber()];
         const dice2Values = [getRandomDiceNumber(), getRandomDiceNumber()];
 
-        updateDiceImages(player1.diceIds, dice1Values);
-        updateDiceImages(player2.diceIds, dice2Values);
+        updateDiceImages(player1.diceFaces, dice1Values);
+        updateDiceImages(player2.diceFaces, dice2Values);
 
         const player1Score = calculateScore(...dice1Values);
         const player2Score = calculateScore(...dice2Values);
@@ -126,9 +124,9 @@ function rollDice(player1, player2) {
 }
 
 
-function updateDiceImages(diceIds, values) {
+function updateDiceImages(diceFaces, values) {
     values.forEach((value, index) => {
-        document.getElementById(diceIds[index]).src = diceImages[value - 1];
+        document.getElementById(diceFaces[index]).src = diceImages[value - 1];
     });
 }
 
@@ -170,28 +168,28 @@ function showGameOverMessage(player1, player2) {
     const scoresText       = document.getElementById('finish-game-score');
 
     if (player1.totalScore > player2.totalScore) {
-        messageText.textContent = `Player 1 wins!`;
+        messageText.innerHTML = `Player 1 wins!`;
     } 
     else if (player1.totalScore < player2.totalScore) {
-        messageText.textContent = `Player 2 wins!`;
+        messageText.innerHTML = `Player 2 wins!`;
     } 
     else {
-        messageText.textContent = `It's a tie!`;
+        messageText.innerHTML = `It's a tie!`;
     }
 
     scoresText.innerHTML  = `<p>Player 1 Total Score: ${player1.totalScore}</p>`;
     scoresText.innerHTML += `<p>Player 2 Total Score: ${player2.totalScore}</p>`;
 
-    messageContainer.classList.remove('hidden');
+    messageWarning.classList.remove('hidden');
 
     document.getElementById('close-message').addEventListener('click', () => {
-        messageContainer.classList.add('hidden');
+        messageWarning.classList.add('hidden');
     });
 }
 
-function animateDiceRoll(diceIds) {
-    diceIds.forEach(diceId => {
-        const dice = document.getElementById(diceId);
+function animateDiceRoll(diceFaces) {
+    diceFaces.forEach(diceFaces => {
+        const dice = document.getElementById(diceFaces);
 
         dice.classList.remove('rolling-dice');
         void dice.offsetWidth; 
