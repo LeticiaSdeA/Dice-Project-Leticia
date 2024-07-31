@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dice Game </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/functions.js" defer></script>
+
+</head>
+<body>
+
+    <header>
+        <h2>Dice Game</h2>
+        <img src="img/perspective-dice-six-faces-random.png" alt="Dice logo with interrogation signs in each side">
+    </header>
+
+    <main>
+
+        <section class="player" id="player1">
+            <h3>Player 1</h3>
+            <img id="player1-image" src="img/Player1.avif" alt="Player 1 Character">
+
+            <div class="dice-grid">
+                <img id="player1-dice1" src="img/rolling-dices.png" class="rolling-dice" alt="Rolling Dice">
+                <img id="player1-dice2" src="img/rolling-dices.png" class="rolling-dice" alt="Rolling Dice">
+            </div>
+
+            <div class="score">
+                <p>Current Points: <span id="player1-current-points">0</span></p>
+                <p>Total Score: <span id="player1-total-score">0</span></p>
+            </div>
+        </section>
+
+        <section class="player" id="player2">
+            <h3>Player 2</h3>
+            <img id="player2-image" src="img/player2.avif" alt="Player 2 Character">
+
+            <div class="dice-grid">
+                <img id="player2-dice1" src="img/rolling-dices.png" class="rolling-dice" alt="Rolling Dice">
+                <img id="player2-dice2" src="img/rolling-dices.png" class="rolling-dice" alt="Rolling Dice">
+            </div>
+
+            <div class="score">
+                <p>Current Points: <span id="player2-current-points">0</span></p>
+                <p>Total Score: <span id="player2-total-score">0</span></p>
+            </div>
+        </section>
+
+    </main>
+
+    <div class="buttons">
+        <button id="start-button">Start</button>
+        <button id="roll-button">Roll the Dice</button>
+        <button id="restart-button">Restart</button>
+    </div>
+
+    <div id="finish-game-message" class="hidden">
+        <p id="finish-game-text"> The game is over!</p>
+        <p id="finish-game-score"> The final score is: </p>
+        <button id="close-message">Close</button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contact Me</h3>
+                <p>Email: lalmeidasanches@my.bcit.ca</p>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Leticia Sanches. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
