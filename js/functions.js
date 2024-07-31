@@ -165,7 +165,7 @@ function restartGame() {
 }
 
 function showGameOverMessage(player1, player2) {
-    const messageContainer = document.getElementById('finish-game-message');
+    const messageWarning   = document.getElementById('finish-game-message');
     const messageText      = document.getElementById('finish-game-text');
     const scoresText       = document.getElementById('finish-game-score');
 
